@@ -1,5 +1,9 @@
 main.ed--main
-    section.ed--module.hero-desktop
+    section.ed--module.hero
         .heroText
             h1(style='background-image:url('+`${assetPath}`+'heroTexture.jpg);') !{title}
+
+    section.ed--module.ed--module-product-grid
+        .gridHolder
+            .ed--module-category-single-recursive(data-itemcta=`${product_cta}` data-recursiveimage="2" data-title=`${product_1_title}` data-subtitle=`${product_1_subtitle}` data-feed=`${feedPath}`+'/shopping/women/trainers-1/items.aspx?format=json' data-iswide="yes" data-recursiveimagewide="3")
 
