@@ -54,6 +54,9 @@ CategorySingleFeedRecursive.prototype.buildItem = function($product) {
             recursiveImage = recursiveImage.filter(function(item){return item['size'] === '800'})[0]
             var productImage = document.createElement('div');
             productImage.className = 'productImage';
+            if (i > 0) {
+                productImage.className += ' right';
+            }
             productImage.style.backgroundImage = 'url('+recursiveImage.url+')';
             self.$el.append(productImage)
         }, function(error) {

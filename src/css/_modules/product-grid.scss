@@ -1,5 +1,6 @@
 .ed--module-product-grid {
      text-align: center;
+     padding:0 !important;
 
     .gridHolder {
         width:100%;
@@ -15,12 +16,41 @@
 
             &.wide {
                 width: 100%;
+                padding-bottom:40%;
+
+                @media only screen and (max-width: 767px) {
+                    & {
+                        padding-bottom:100%;
+                    }
+                }
+
+                .itemContentHolder {
+                    justify-content: center;
+                    @media only screen and (max-width: 767px) {
+                        & {
+                            justify-content: space-between;
+                        }
+                    }
+                }
 
                 .productImage {
                     width: 50%;
-                    &:last-child {
-                        left: auto;
+
+                    @media only screen and (max-width: 767px) {
+                        & {
+                            width: 100%;
+                        }
+                    }
+                    &.right {
                         right:0;
+                        left:auto;
+
+                        @media only screen and (max-width: 767px) {
+                            & {
+                                display: none;
+                            }
+                        }
+
                     }
                 }
             }
@@ -48,7 +78,7 @@
                 left:0;
                 width:100%;
                 height:100%;
-                background-size: auto 90%;
+                background-size: auto 100%;
                 background-position: 50% 25%;
                 background-repeat: no-repeat;
                 mix-blend-mode: multiply;
