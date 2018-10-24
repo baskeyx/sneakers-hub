@@ -71,12 +71,12 @@ CategorySingleFeedRecursive.prototype.buildItem = function($product) {
     itemContentHolderTop.className = 'itemContentHolderTop';
 
     var itemTitle = document.createElement('h3');
-    itemTitle.className = 'itemBrand styled';
+    itemTitle.className = 'itemTitle text bold';
     itemTitle.innerHTML = self.$title;
     itemContentHolderTop.append(itemTitle)
 
     var itemSubTitle = document.createElement('h2');
-    itemSubTitle.className = 'itemBrand styled';
+    itemSubTitle.className = 'itemSubTitle bold text';
     itemSubTitle.innerHTML = self.$subtitle;
     itemContentHolderTop.append(itemSubTitle);
 
