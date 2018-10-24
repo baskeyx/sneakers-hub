@@ -16,6 +16,7 @@ var CategorySingleFeedRecursive = function($target) {
     } else {
         self.$isWide = false
     }
+    // if it's wide, but no recursive image has been set, use the default one
     if (self.$el.dataset.recursiveimagewide){
         self.$recursiveImageWide = parseInt(self.$el.dataset.recursiveimagewide);
     } else {
@@ -24,12 +25,14 @@ var CategorySingleFeedRecursive = function($target) {
 
     // get feed
     getFeed(self.$feedUrl).then(function(response) {
-        // grab first item from the response, then build item in DOM
         if (self.$isWide) {
+            // grab 2 products if it's wide
             self.$product = response.Products.List.slice(0,2);
         } else {
+            // else just grab 1
             self.$product = response.Products.List.slice(0,1);
         }
+        // build product
         self.buildItem(self.$product);
 
     }, function(error) {
@@ -39,9 +42,8 @@ var CategorySingleFeedRecursive = function($target) {
 
 CategorySingleFeedRecursive.prototype.buildItem = function($product) {
     var self = this;
-
+    // recursive product lookup for image
     $product.forEach(function(product,i){
-        // recursive product lookup for image
         getFeed(self.$recursiveURL+product.ProductId).then(function(response) {
             var order;
             if (i === 0) {
