@@ -1,0 +1,14 @@
+/*SEO-337*/
+!function(){var e=document.getElementsByClassName("ff-nav-a ff-drag-level condensed letter-spacing uppercase "),n=0,l=document.createElement("ul");l.className="ff-nav-ul",l.innerHTML='<li class="ff-nav-title"><span class="condensed letter-spacing uppercase">THE STYLE GUIDE</span></li><li><a class="ff-nav-a no-color" href="/au/style-guide/?ffref=hd_snav" title="All stories">All stories</a></li>';for(var a=0,s=e.length;s>a;a++){if(-1!==e[a].innerHTML.toUpperCase().indexOf("EDITORIAL")){n++;for(var t=e[a].nextElementSibling.children,i=0,r=t.length;r>i;i++)if(0===t[i].children.length){t[i].appendChild(l.cloneNode(!0));break}}if(2===n)break}}();
+
+if(window.location.href.indexOf("boutiques") > -1) {
+   var cache = document.querySelector('main section');
+    for(var i = 0; i < cache.childNodes.length; i++) {
+        if(cache.childNodes[i].nodeType === 3 && (cache.childNodes[i].data.replace(/\s/g, "") == '#X-FF-layout-partial:_TooltipGender#')) {
+             cache.childNodes[i].remove();
+        }
+    }
+}
+</script>
+</body>
+</html>

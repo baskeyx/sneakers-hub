@@ -1,0 +1,56 @@
+@import '_modules/product-grid';
+
+main.ed--main {
+    width:100%;
+    // background: white;
+    position: relative;
+    display: block;
+}
+
+.ed--module {
+    width: 100%;
+    max-width: 1440px;
+    padding:30px;
+    margin:0 auto !important;
+    display: block;
+
+    a.itemLink {
+        margin-top: 15px;
+        display: inline-block;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-decoration: underline;
+        transition: color 0.2s ease-out;
+
+        &:hover {
+            color: #666;
+        }
+    }
+
+    p.itemDesc {
+        font-size:14px;
+    }
+}
+
+.hero-desktop {
+    text-align: center;
+    padding-top:50px;
+    padding-bottom:50px;
+
+    .heroText {
+        display: inline-block;
+    }
+
+    h1 {
+        font-size:100px;
+        letter-spacing: normal;
+        margin:0;
+        line-height:1;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: transparent;
+    }
+}
