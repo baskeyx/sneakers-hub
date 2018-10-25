@@ -8,7 +8,7 @@ var CategorySingleFeedRecursive = function($target) {
     self.$ctaText = self.$el.dataset.itemcta;
     self.$title = self.$el.dataset.title;
     self.$subtitle = self.$el.dataset.subtitle;
-    self.$product = [];
+    self.$products = [];
     // wide
     if (self.$el.dataset.iswide === 'yes') {
         self.$isWide = true;
@@ -27,23 +27,23 @@ var CategorySingleFeedRecursive = function($target) {
     getFeed(self.$feedUrl).then(function(response) {
         if (self.$isWide) {
             // grab 2 products if it's wide
-            self.$product = response.Products.List.slice(0,2);
+            self.$products = response.Products.List.slice(0,2);
         } else {
             // else just grab 1
-            self.$product = response.Products.List.slice(0,1);
+            self.$products = response.Products.List.slice(0,1);
         }
         // build product
-        self.buildItem(self.$product);
+        self.buildItem(self.$products);
 
     }, function(error) {
         console.error(error);
     });
 }
 
-CategorySingleFeedRecursive.prototype.buildItem = function($product) {
+CategorySingleFeedRecursive.prototype.buildItem = function($products) {
     var self = this;
     // recursive product lookup for image
-    $product.forEach(function(product,i){
+    $products.forEach(function(product,i){
         getFeed(self.$recursiveURL+product.ProductId).then(function(response) {
             var order;
             if (i === 0) {
