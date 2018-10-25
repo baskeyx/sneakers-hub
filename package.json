@@ -1,7 +1,7 @@
 {
-  "name": "ff-editorial-blank-master",
+  "name": "sneakers-hub",
   "version": "1.0.0",
-  "description": "Blank Project for Farfetch Editorials",
+  "description": "Sneakers Hub Template",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
