@@ -50,7 +50,7 @@
                     height:100%;
 
                     .productImage {
-                        //background-size: auto 100%;
+                        background-size: auto 80%;
                         @media only screen and (max-width: 767px) {
                             & {
                                 display: block;
