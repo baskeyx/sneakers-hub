@@ -225,8 +225,15 @@
                 background-size: auto 100%;
                 background-position: center;
                 background-repeat: no-repeat;
-                mix-blend-mode: multiply;
+                // mix-blend-mode: multiply;
                 z-index: 1;
+
+                @keyframes fadeIn {
+                    0% {opacity: 0}
+                    100% {opacity: 1}
+                }
+
+                animation: fadeIn 0.6s $ease-out-expo;
 
                 @media only screen and (max-width: 767px) {
                     & {
