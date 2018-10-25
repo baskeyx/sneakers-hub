@@ -1,7 +1,7 @@
 'use strict';
 // project
 var projectName = require('path').basename(__dirname); // grabs the current folder name
-var assetCDN = 'https://cdn-static.farfetch-contents.com/Content/UP/'+projectName+'/';
+var assetCDN = 'https://cdn-static.farfetch-contents.com/Content/UP/editorial_assets/'+projectName+'/';
 var assetPath = '/assets/';
 var feedPath = 'https://www.farfetch.com/uk';
 // gulp

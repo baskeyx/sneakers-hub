@@ -2,7 +2,11 @@
 var CategorySingleFeedRecursive = function($target) {
     var self = this;
     self.$el = $target;
-    self.$recursiveURL = 'https://www.farfetch.com/uk/api/ecommerce/products/';
+    if (window.universal_variable.page.subfolder === '') {
+        self.$recursiveURL = 'https://www.farfetch.com/uk/api/ecommerce/products/';
+    } else {
+        self.$recursiveURL = window.universal_variable.page.subfolder+'api/ecommerce/products/';
+    }
     self.$recursiveImage = parseInt(self.$el.dataset.recursiveimage);
     self.$feedUrl = self.$el.dataset.feed;
     self.$ctaText = self.$el.dataset.itemcta;
