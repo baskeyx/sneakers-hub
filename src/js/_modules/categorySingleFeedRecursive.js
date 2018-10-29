@@ -76,15 +76,15 @@ CategorySingleFeedRecursive.prototype.buildItem = function($products) {
     var itemContentHolderTop = document.createElement('div');
     itemContentHolderTop.className = 'itemContentHolderTop';
 
-    var itemTitle = document.createElement('h3');
-    itemTitle.className = 'itemTitle text bold';
-    itemTitle.innerHTML = self.$title;
-    itemContentHolderTop.append(itemTitle)
-
-    var itemSubTitle = document.createElement('h2');
-    itemSubTitle.className = 'itemSubTitle bold text';
+    var itemSubTitle = document.createElement('h3');
+    itemSubTitle.className = 'itemSubTitle text bold';
     itemSubTitle.innerHTML = self.$subtitle;
-    itemContentHolderTop.append(itemSubTitle);
+    itemContentHolderTop.append(itemSubTitle)
+
+    var itemTitle = document.createElement('h2');
+    itemTitle.className = 'itemTitle bold text';
+    itemTitle.innerHTML = self.$title;
+    itemContentHolderTop.append(itemTitle);
 
     var itemContentHolderBottom = document.createElement('div');
     itemContentHolderBottom.className = 'itemContentHolderBottom';

@@ -84,11 +84,11 @@
                             .itemContentHolder {
                                 padding:5px;
 
-                                h3.itemTitle {
+                                h3.itemSubTitle {
                                     font-size:9px !important;
                                 }
 
-                                h2.itemSubTitle {
+                                h2.itemTitle {
                                     font-size: 13px !important;
                                     margin-top:-8px;
                                 }
@@ -116,12 +116,12 @@
             }
 
             .small-col, .half-col {
-                h3.itemTitle {
+                h3.itemSubTitle {
                     font-size:11px;
                     margin-bottom: 0;
                 }
 
-                h2.itemSubTitle {
+                h2.itemTitle {
                     font-size: 16px;
                     margin-top: -4px;
                 }
@@ -185,7 +185,7 @@
                 }
             }
 
-            h3.itemTitle {
+            h3.itemSubTitle {
                 text-transform: uppercase;
                 letter-spacing: 1px;
                 font-weight: normal;
@@ -199,7 +199,7 @@
                 }
             }
 
-            h2.itemSubTitle {
+            h2.itemTitle {
                 text-transform: none;
                 letter-spacing: normal;
                 font-size: 24px;
