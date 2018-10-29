@@ -27,7 +27,7 @@
                     & {
                         width:100%;
                         .ed--module-category-single-recursive {
-                            padding-bottom:100%;
+                            padding-bottom:70%;
                         }
                     }
                 }
@@ -48,9 +48,15 @@
 
                 .ed--module-category-single-recursive {
                     height:100%;
+                    @media only screen and (max-width: 767px) {
+                        & {
+                            height:auto;
+                            padding-bottom:70%;
+                        }
+                    }
 
                     .productImage {
-                        background-size: auto 80%;
+                        background-size: contain;
                         @media only screen and (max-width: 767px) {
                             & {
                                 display: block;
@@ -59,7 +65,12 @@
                     }
 
                     .itemContentHolder {
-                        padding:15px;
+                        padding:15px 15px 30px 15px;
+                        @media only screen and (max-width: 767px) {
+                            & {
+                                padding: 20px;
+                            }
+                        }
                     }
                 }
             }
@@ -71,18 +82,18 @@
             &.double {
                 display: flex;
                 .ed--module-category-single-recursive {
-                    padding-bottom: 70%;
+                    padding-bottom:65%;
 
                     @media only screen and (max-width: 767px) {
                         & {
-                            padding-bottom:125%;
+                            padding-bottom:100%;
 
                             .productImage {
-                                background-size: auto 60%;
+                                background-size: contain;
                             }
 
                             .itemContentHolder {
-                                padding:5px;
+                                padding:10px 7px 10px 7px;
 
                                 h3.itemSubTitle {
                                     font-size:9px !important;
@@ -90,7 +101,7 @@
 
                                 h2.itemTitle {
                                     font-size: 13px !important;
-                                    margin-top:-8px;
+                                    margin-top:0px;
                                 }
 
                                 a.itemLink {
@@ -117,13 +128,12 @@
 
             .small-col, .half-col {
                 h3.itemSubTitle {
-                    font-size:11px;
-                    margin-bottom: 0;
+                    font-size:10px;
+                    margin-bottom:3px;
                 }
 
                 h2.itemTitle {
-                    font-size: 16px;
-                    margin-top: -4px;
+                    font-size: 18px;
                 }
             }
         }
@@ -135,13 +145,22 @@
             padding-bottom:75%;
             border:10px solid #f5f5f5;
 
+            @media only screen and (max-width: 767px) {
+                & {
+                    width: 100%;
+                    padding-bottom:100%;
+                    border:0;
+                    border-bottom:10px solid #f5f5f5;
+                }
+            }
+
             &.wide {
                 width: 100%;
                 padding-bottom:30%;
 
                 @media only screen and (max-width: 767px) {
                     & {
-                        padding-bottom:100%;
+                        padding-bottom:70%;
                     }
                 }
 
@@ -176,25 +195,17 @@
                 }
             }
 
-            @media only screen and (max-width: 767px) {
-                & {
-                    width: 100%;
-                    padding-bottom:100%;
-                    border:0;
-                    border-bottom:10px solid #f5f5f5;
-                }
-            }
-
             h3.itemSubTitle {
                 text-transform: uppercase;
                 letter-spacing: 1px;
                 font-weight: normal;
                 font-size:11px;
                 margin-bottom:2px;
+                line-height: 1.5;
 
                 @media only screen and (max-width: 767px) {
                     & {
-                        font-size:11px !important;
+                        font-size:10px !important;
                     }
                 }
             }
@@ -204,16 +215,26 @@
                 letter-spacing: normal;
                 font-size: 24px;
                 margin-bottom:7px;
+                line-height: 1.5;
                 @media only screen and (max-width: 767px) {
                     & {
-                        font-size:18px !important;
-                        margin-top:-5px;
+                        font-size:20px !important;
+                        //margin-top:-5px;
                     }
                 }
             }
 
             .itemLink {
                 margin-top:10px;
+                pointer-events:all;
+            }
+
+            a.productLink {
+                position: absolute;
+                top:0;
+                left:0;
+                width:100%;
+                height:100%;
             }
 
             .productImage {
@@ -237,7 +258,7 @@
 
                 @media only screen and (max-width: 767px) {
                     & {
-                        background-size: auto 80%;
+                        background-size: contain;
                     }
                 }
             }
@@ -252,12 +273,18 @@
                 text-align: center;
                 width: 100%;
                 z-index: 2;
-                padding:20px;
+                padding:20px 20px 30px 20px;
                 height:100%;
                 display: flex;
                 align-items:center;
                 justify-content: space-between;
                 flex-direction:column;
+                pointer-events:none;
+                @media only screen and (max-width: 767px) {
+                    & {
+                        padding:20px;
+                    }
+                }
             }
 
         }

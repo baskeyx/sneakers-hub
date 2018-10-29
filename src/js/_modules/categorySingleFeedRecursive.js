@@ -64,7 +64,12 @@ CategorySingleFeedRecursive.prototype.buildItem = function($products) {
                 productImage.className += ' right';
             }
             productImage.style.backgroundImage = 'url('+recursiveImage.url+')';
-            self.$el.append(productImage)
+
+            var productLink = document.createElement('a');
+            productLink.href = self.$feedUrl.replace('?format=json','').replace('&format=json','');
+            productLink.className = 'productLink';
+            productLink.append(productImage)
+            self.$el.append(productLink)
         }, function(error) {
             console.error(error);
         });
