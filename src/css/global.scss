@@ -42,7 +42,6 @@ main.ed--main {
     @media only screen and (max-width: 767px) {
         & {
             overflow: hidden;
-            background:white;
             border:10px solid #f5f5f5;
             border-bottom: 0;
             padding: 30px 15px;
@@ -54,12 +53,12 @@ main.ed--main {
         display: inline-block;
         @keyframes slideIn {
             0% {transform: translateY(-100%);opacity:0;}
-            50% {transform: translateY(-100%);opacity:0;}
+            30% {transform: translateY(-100%);opacity:0;}
             100% {transform: translateY(0%);opacity:1;}
         }
         @media only screen and (max-width: 767px) {
             & {
-                animation: slideIn 3s $ease-out-expo;
+                animation: slideIn 2.5s $ease-out-expo;
             }
         }
     }

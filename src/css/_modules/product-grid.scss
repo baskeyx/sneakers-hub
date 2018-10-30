@@ -27,7 +27,7 @@
                     & {
                         width:100%;
                         .ed--module-category-single-recursive {
-                            padding-bottom:70%;
+                            padding-bottom:110%;
                         }
                     }
                 }
@@ -51,21 +51,22 @@
                     @media only screen and (max-width: 767px) {
                         & {
                             height:auto;
-                            padding-bottom:70%;
+                            padding-bottom:80%;
                         }
                     }
 
                     .productImage {
-                        background-size: contain;
+                        background-size: auto 80%;
                         @media only screen and (max-width: 767px) {
                             & {
+                                background-size: auto 80%;
                                 display: block;
                             }
                         }
                     }
 
                     .itemContentHolder {
-                        padding:15px 15px 30px 15px;
+                        padding:15px 15px 25px 15px;
                         @media only screen and (max-width: 767px) {
                             & {
                                 padding: 20px;
@@ -84,12 +85,16 @@
                 .ed--module-category-single-recursive {
                     padding-bottom:65%;
 
+                    .productImage {
+                        background-size: auto 90%;
+                    }
+
                     @media only screen and (max-width: 767px) {
                         & {
-                            padding-bottom:100%;
+                            padding-bottom:125%;
 
                             .productImage {
-                                background-size: contain;
+                                background-size: auto 76%;
                             }
 
                             .itemContentHolder {
@@ -160,7 +165,7 @@
 
                 @media only screen and (max-width: 767px) {
                     & {
-                        padding-bottom:70%;
+                        padding-bottom:110%;
                     }
                 }
 
@@ -179,6 +184,7 @@
                     @media only screen and (max-width: 767px) {
                         & {
                             width: 100%;
+                            background-size: auto 85%;
                         }
                     }
                     &.right {
@@ -273,7 +279,7 @@
                 text-align: center;
                 width: 100%;
                 z-index: 2;
-                padding:20px 20px 30px 20px;
+                padding:20px 20px 25px 20px;
                 height:100%;
                 display: flex;
                 align-items:center;
