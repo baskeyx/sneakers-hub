@@ -68,12 +68,37 @@ main.ed--main {
         letter-spacing: normal;
         margin:0;
         line-height:1;
+
+        /* background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat; */
+        color: transparent;
+
+        background: linear-gradient(206deg, #fc47e8, #476efc, #36006d);
+        background-size: 300% 300%;
+
+        -webkit-animation: colorRotate 4s ease infinite;
+        -moz-animation: colorRotate 4s ease infinite;
+        animation: colorRotate 4s ease infinite;
+
+        @-webkit-keyframes colorRotate {
+            0%{background-position:78% 0%}
+            50%{background-position:23% 100%}
+            100%{background-position:78% 0%}
+        }
+        @-moz-keyframes colorRotate {
+            0%{background-position:78% 0%}
+            50%{background-position:23% 100%}
+            100%{background-position:78% 0%}
+        }
+        @keyframes colorRotate {
+            0%{background-position:78% 0%}
+            50%{background-position:23% 100%}
+            100%{background-position:78% 0%}
+        }
+
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        color: transparent;
 
         @media only screen and (max-width: 767px) {
             & {
