@@ -58,7 +58,7 @@ main.ed--main {
         }
         @media only screen and (max-width: 767px) {
             & {
-                animation: slideIn 2.5s $ease-out-expo;
+                // animation: slideIn 2.5s $ease-out-expo;
             }
         }
     }
@@ -74,27 +74,27 @@ main.ed--main {
         background-repeat: no-repeat; */
         color: transparent;
 
-        background: linear-gradient(206deg, #fc47e8, #476efc, #36006d);
-        background-size: 300% 300%;
+        background: linear-gradient(150deg, #000000, #f5405d, #2304fb, #fb99b1, #f1d2a3, #000000);
+        background-size: 600% 600%;
 
-        -webkit-animation: colorRotate 4s ease infinite;
-        -moz-animation: colorRotate 4s ease infinite;
-        animation: colorRotate 4s ease infinite;
+        -webkit-animation: colorRotate 30s linear infinite;
+        -moz-animation: colorRotate 30s linear infinite;
+        animation: colorRotate 30s linear infinite;
 
         @-webkit-keyframes colorRotate {
-            0%{background-position:78% 0%}
-            50%{background-position:23% 100%}
-            100%{background-position:78% 0%}
+            0%{background-position:0% 7%}
+            50%{background-position:100% 94%}
+            100%{background-position:0% 7%}
         }
         @-moz-keyframes colorRotate {
-            0%{background-position:78% 0%}
-            50%{background-position:23% 100%}
-            100%{background-position:78% 0%}
+            0%{background-position:0% 7%}
+            50%{background-position:100% 94%}
+            100%{background-position:0% 7%}
         }
         @keyframes colorRotate {
-            0%{background-position:78% 0%}
-            50%{background-position:23% 100%}
-            100%{background-position:78% 0%}
+            0%{background-position:0% 7%}
+            50%{background-position:100% 94%}
+            100%{background-position:0% 7%}
         }
 
         -webkit-background-clip: text;
