@@ -66,7 +66,13 @@ CategorySingleFeedRecursive.prototype.buildItem = function($products) {
             productImage.style.backgroundImage = 'url('+recursiveImage.url+')';
 
             var productLink = document.createElement('a');
-            productLink.href = self.$feedUrl.replace('?format=json','').replace('&format=json','') + '?from=sneakers-hub';
+
+            productLink.href = self.$feedUrl.replace('?format=json','').replace('&format=json','');
+            if (productLink.href.indexOf('?') > -1) {
+                productLink.href = productLink.href + '&from=sneakers-hub'
+            } else {
+                productLink.href = productLink.href + '?from=sneakers-hub'
+            }
             productLink.className = 'productLink';
             productLink.dataset.ffref = 'sneakershub';
             productLink.append(productImage)
@@ -99,7 +105,12 @@ CategorySingleFeedRecursive.prototype.buildItem = function($products) {
     itemLink.className = 'itemLink bold';
     itemLink.innerHTML = self.$ctaText;
     itemLink.dataset.ffref = 'sneakershub';
-    itemLink.href = self.$feedUrl.replace('?format=json','').replace('&format=json','')  + '?from=sneakers-hub';
+    itemLink.href = self.$feedUrl.replace('?format=json','').replace('&format=json','');
+    if (itemLink.href.indexOf('?') > -1) {
+        itemLink.href = itemLink.href + '&from=sneakers-hub'
+    } else {
+        itemLink.href = itemLink.href + '?from=sneakers-hub'
+    }
     itemContentHolderBottom.append(itemLink);
 
     itemContentHolder.append(itemContentHolderTop);
