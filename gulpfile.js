@@ -161,13 +161,37 @@ const createSegments = async (page) => {
     let version = el.toString();
     version = version.replace('index_','').replace('.html','').toUpperCase();
     if (version !== 'SE' && version !== 'BR') { // ignore SE and BR as they aren't options on the CMS
+      await console.log('Creating '+version+' segment...')
       await cloneButton.click();
       await page.waitFor(2000);
       await page.select('#TargetContentZone', version)
       await page.waitFor(1000);
       await page.click('#versioning-actions-modal-confirm-button');
       await page.waitFor(2000);
+
+      if (version === 'AR') { // if there's AR version, create AR english version
+        await console.log('Creating AR > en-US segment..')
+        await page.waitFor(2000);
+        let cloneButton = await page.$x("//td[normalize-space(text())='CMS_US']/following::td//a").then(function(result){
+          // copy button
+          return result[1]
+        });
+        await cloneButton.click();
+        await page.waitFor(2000);
+        await page.evaluate(()=>{
+          let option = document.querySelector('input#TargetSegmentType[value="Language"]')
+          option.click();
+        })
+        await page.select('#TargetContentZone', 'AR')
+        await page.waitFor(1000);
+        await page.select('#TargetLanguages', 'en-US')
+        await page.waitFor(1000);
+        await page.click('#versioning-actions-modal-confirm-button');
+        await page.waitFor(2000);
+      }
+
     }
+
   })
   await console.log('Segments Created.')
 }
@@ -238,6 +262,9 @@ const populateSegments = async (page) => {
       }
       await page.waitFor(1500);
       await segmentFillRoutine(page,el,version);
+      if (version === 'AR') {
+        await segmentFillRoutine(page,'index_en.html','AR > en-US');
+      }
     }
   })
   // populate US content last, same as EN
