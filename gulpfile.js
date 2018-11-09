@@ -23,6 +23,9 @@ var clean = require('gulp-clean');
 var rename = require('gulp-rename');
 var puppeteer = require('puppeteer');
 
+const htmlFiles = getFilesFromPath('./dist', '.html');
+const CREDS = require('./deploy_creds');
+
 // browserify
 var customOpts = {
   entries: ['./src/js/main.js'],
@@ -134,9 +137,6 @@ gulp.task('build', gulp.series( gulp.series('clean', gulp.series('html-dist','as
   return process.exit(0);
 }));
 
-// GULP DEPLOY & GULP DEPLOY-BUILD
-const htmlFiles = getFilesFromPath('./dist', '.html')
-const CREDS = require('./deploy_creds');
 
 // helper functions
 function getFilesFromPath(path, extension) {
@@ -197,7 +197,7 @@ const createSegments = async (page) => {
 }
 
 const segmentFillRoutine = async(page,el,version) => {
-  await console.log('Poulating CMS_'+version+'......')
+  await console.log('Populating CMS_'+version+'......')
   let editButton = await page.$x("//td[normalize-space(text())='CMS_"+version+"']/following::td//a").then(function(result){
       // edit button
       return result[0]
@@ -273,6 +273,8 @@ const populateSegments = async (page) => {
 }
 
 gulp.task('deploy', gulp.series( gulp.series('clean', gulp.series('html-dist','assets','javascript','sass')),function(done){
+  // GULP DEPLOY & GULP DEPLOY-BUILD
+
   (async () => {
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
@@ -295,6 +297,7 @@ gulp.task('deploy', gulp.series( gulp.series('clean', gulp.series('html-dist','a
 }));
 
 gulp.task('deploy-update', gulp.series( gulp.series('clean', gulp.series('html-dist','assets','javascript','sass')),function(done){
+  // GULP DEPLOY & GULP DEPLOY-BUILD
   (async () => {
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
