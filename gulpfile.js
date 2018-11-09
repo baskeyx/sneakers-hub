@@ -138,6 +138,8 @@ gulp.task('build', gulp.series( gulp.series('clean', gulp.series('html-dist','as
 }));
 
 
+// GULP DEPLOY & GULP DEPLOY-BUILD
+
 // helper functions
 function getFilesFromPath(path, extension) {
     let dir = fs.readdirSync( path );
@@ -149,6 +151,16 @@ async function asyncForEach(array, callback) {
     await callback(array[index], index, array)
   }
 }
+
+let htmlFiles;
+gulp.task('getFiles', function(done){
+  htmlFiles = getFilesFromPath('./dist', '.html')
+  console.log(htmlFiles)
+  done();
+})
+const CREDS = require('./deploy_creds');
+
+// routines
 
 const createSegments = async (page) => {
   await console.log('Creating Segments....')
@@ -197,7 +209,7 @@ const createSegments = async (page) => {
 }
 
 const segmentFillRoutine = async(page,el,version) => {
-  await console.log('Populating CMS_'+version+'......')
+  await console.log('Poulating CMS_'+version+'......')
   let editButton = await page.$x("//td[normalize-space(text())='CMS_"+version+"']/following::td//a").then(function(result){
       // edit button
       return result[0]
@@ -272,9 +284,7 @@ const populateSegments = async (page) => {
   await console.log('Segments Populated!')
 }
 
-gulp.task('deploy', gulp.series( gulp.series('clean', gulp.series('html-dist','assets','javascript','sass')),function(done){
-  // GULP DEPLOY & GULP DEPLOY-BUILD
-
+gulp.task('deploy', gulp.series( gulp.series('clean', gulp.series('html-dist','assets','javascript','sass','getFiles')),function(done){
   (async () => {
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
@@ -296,8 +306,7 @@ gulp.task('deploy', gulp.series( gulp.series('clean', gulp.series('html-dist','a
   })();
 }));
 
-gulp.task('deploy-update', gulp.series( gulp.series('clean', gulp.series('html-dist','assets','javascript','sass')),function(done){
-  // GULP DEPLOY & GULP DEPLOY-BUILD
+gulp.task('deploy-update', gulp.series( gulp.series('clean', gulp.series('html-dist','assets','javascript','sass','getFiles')),function(done){
   (async () => {
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
