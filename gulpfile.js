@@ -21,6 +21,7 @@ var assign = require('lodash.assign');
 var uglify = require('gulp-uglify');
 var clean = require('gulp-clean');
 var rename = require('gulp-rename');
+var puppeteer = require('puppeteer');
 
 // browserify
 var customOpts = {
@@ -131,4 +132,158 @@ gulp.task('build', gulp.series( gulp.series('clean', gulp.series('html-dist','as
   done()
   // exit terminal process
   return process.exit(0);
+}));
+
+// GULP DEPLOY & GULP DEPLOY-BUILD
+const htmlFiles = getFilesFromPath('./dist', '.html')
+const CREDS = require('./deploy_creds');
+
+// helper functions
+function getFilesFromPath(path, extension) {
+    let dir = fs.readdirSync( path );
+    return dir.filter( elm => elm.match(new RegExp(`.*\.(${extension})`, 'ig')));
+}
+
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array)
+  }
+}
+
+const createSegments = async (page) => {
+  await console.log('Creating Segments....')
+  await asyncForEach(htmlFiles, async (el,i) => {
+    await page.waitFor(1500);
+    let cloneButton = await page.$x("//td[normalize-space(text())='CMS_US']/following::td//a").then(function(result){
+      // copy button
+      return result[1]
+    });
+    let version = el.toString();
+    version = version.replace('index_','').replace('.html','').toUpperCase();
+    if (version !== 'SE' && version !== 'BR') { // ignore SE and BR as they aren't options on the CMS
+      await cloneButton.click();
+      await page.waitFor(2000);
+      await page.select('#TargetContentZone', version)
+      await page.waitFor(1000);
+      await page.click('#versioning-actions-modal-confirm-button');
+      await page.waitFor(2000);
+    }
+  })
+  await console.log('Segments Created.')
+}
+
+const segmentFillRoutine = async(page,el,version) => {
+  await console.log('Poulating CMS_'+version+'......')
+  let editButton = await page.$x("//td[normalize-space(text())='CMS_"+version+"']/following::td//a").then(function(result){
+      // edit button
+      return result[0]
+  });
+  await page.waitFor(1000);
+  await editButton.click();
+  await page.waitForNavigation();
+  let htmlContent = await fs.readFileSync('./dist/'+el, 'utf-8').toString();
+  let cssContent = await fs.readFileSync('./dist/css/global.css', 'utf-8').toString();
+  let jsContent = await fs.readFileSync('./dist/js/main.js', 'utf-8').toString();
+  await page.waitFor(1000);
+  await page.$eval('#codemirror-content-html', (el,value) => {
+      let dom = document.querySelector('#codemirror-content-html');
+      let parent = dom.parentNode;
+      parent.removeChild(dom);
+      let htmlField = document.createElement('textarea');
+      parent.appendChild(htmlField);
+      htmlField.name = 'HtmlContent';
+      htmlField.value = value
+  }, htmlContent);
+  await page.$eval('#codemirror-content-css', (el, value) => el.value = value, cssContent);
+  await page.$eval('#codemirror-content-js', (el, value) => el.value = value, jsContent);
+  let saveButton = await page.$('input#buttonEditFlat');
+  await saveButton.click();
+  await page.waitForNavigation();
+  let backButton = await page.$('.pull-left a');
+  await backButton.click();
+  await page.waitForNavigation();
+  await page.waitFor(1500);
+}
+
+const populateSegments = async (page) => {
+  await asyncForEach(htmlFiles, async (el,i) => {
+    let version = el.toString();
+    version = version.replace('index_','').replace('.html','').toUpperCase();
+    if (version !== 'SE' && version !== 'BR') { // ignore SE and BR as they aren't options on the CMS
+      switch(version){ // adjust version variable for non-matching cell names to match CMS
+        case 'CN':
+        version = 'China';
+        break;
+        case 'DE':
+        version = 'German';
+        break;
+        case 'ES':
+        version = 'Spanish';
+        break;
+        case 'FR':
+        version = 'France';
+        break;
+        case 'JP':
+        version = 'Japan';
+        break;
+        case 'KO':
+        version = 'Korean';
+        break;
+        case 'MX':
+        version = 'Latin America';
+        break;
+        case 'RU':
+        version = 'Russia';
+        break;
+      }
+      await page.waitFor(1500);
+      await segmentFillRoutine(page,el,version);
+    }
+  })
+  // populate US content last, same as EN
+  await segmentFillRoutine(page,'index_en.html','US');
+  await console.log('Segments Populated!')
+}
+
+gulp.task('deploy', gulp.series( gulp.series('clean', gulp.series('html-dist','assets','javascript','sass')),function(done){
+  (async () => {
+    const browser = await puppeteer.launch({ headless: false });
+    const page = await browser.newPage();
+    await page.goto(CREDS.deploy_url);
+    await page.waitFor(2000);
+    // login
+    await page.click('#username');
+    await page.keyboard.type(CREDS.username);
+    await page.click('#password');
+    await page.keyboard.type(CREDS.password);
+    await page.click('.FF-button');
+    await page.waitFor(3000);
+    // for each translation, perform deployment routine
+    await createSegments(page);
+    await populateSegments(page);
+    // exit terminal process
+    await done();
+    await process.exit(0);
+  })();
+}));
+
+gulp.task('deploy-update', gulp.series( gulp.series('clean', gulp.series('html-dist','assets','javascript','sass')),function(done){
+  (async () => {
+    const browser = await puppeteer.launch({ headless: false });
+    const page = await browser.newPage();
+    await page.goto(CREDS.deploy_url);
+    await page.waitFor(2000);
+    // login
+    await page.click('#username');
+    await page.keyboard.type(CREDS.username);
+    await page.click('#password');
+    await page.keyboard.type(CREDS.password);
+    await page.click('.FF-button');
+    await page.waitFor(3000);
+    // for each translation, perform deployment routine
+    await populateSegments(page);
+    // exit terminal process
+    await done();
+    await process.exit(0);
+  })();
 }));
